@@ -80,7 +80,7 @@ const Input = () => {
       </div>
       <div className='btn_wrapper lg:w-2xs flex'>
         <button className='scan_btn h-full active:scale-97 select-none' onClick={scanBtnClick} >{scanTxt}</button>
-        <button className='clear_btn h-full lg:w-1/4 active:scale-97 select-none' onClick={clearBtnClick} >CLEAR</button>
+        <button className='clear_btn h-full lg:w-1/4 active:scale-97 select-none' onClick={clearBtnClick}>CLEAR</button>
       </div>
       </div>
     </div>

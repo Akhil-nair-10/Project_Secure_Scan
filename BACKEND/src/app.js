@@ -98,18 +98,15 @@ app.post('/ai-summary', async (req, res) => {
     const prompt = `
 You are a cybersecurity assistant.
 
-Analyze this VirusTotal scan result:
+Analyze this VirusTotal scan result and generate a summary based on this:
 
 Malicious: ${reportData.malicious}
 Suspicious: ${reportData.suspicious}
-Undetected: ${reportData.undetected}
-And make sure to not use text in bold or itaclic. Just plain text.
-Give:
-1. Simple safety verdict (Safe / Suspicious / Dangerous)
-2. Short explanation (120 words max)
-3. Advice to user 
+Undetected: ${reportData.undetected} 
 
-and make sure to leave a line after each point.
+Provide me a short report summary of 120 words stictly that first contains whether the file is safe, suspicious or malicious 
+Then tell me how many number of vendors have said it is safe or malicious 
+Then give an advice to the user based on this 
 `;
 
 const result = await model.generateContent({ contents: [

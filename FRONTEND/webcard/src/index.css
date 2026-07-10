@@ -72,6 +72,10 @@ body{
     align-items: center;
     box-shadow: 0px 0px 15px white;
     animation: breathe 3s infinite ease-in-out;
+    cursor: pointer;
+}
+.icon_frame:hover{
+    background-color: rgb(104, 255, 255);
 }
 
 .key_hole{
@@ -160,7 +164,7 @@ body{
     padding: 10px;
     color: white;
     border-radius: 10px;
-    animation: breathe2 3s infinite ease-in-out;
+    animation: breathe 3s infinite ease-in-out;
 }
 
 .result_bg{
@@ -196,4 +200,125 @@ body{
 
 .txt_report_summary{
     margin-top: 20px;
+}
+
+/*------- Result page css ENDS -------*/
+
+/*------- About_user css -------*/
+
+.about_bg{
+    background: rgb(0, 0, 76);
+}
+
+.wrapper{
+    background: rgb(0, 0, 76);
+    animation: breathe 3s infinite ease-in-out;
+    border-radius: 20px;
+}
+
+.user_frame_top{
+    border-radius: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.back_btnx{
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid cyan;
+    margin-bottom: 15px;
+}
+.back_btnx:hover{
+    border: 2px solid darkcyan;
+    color: darkcyan;
+}
+
+.user_frame_main{
+    border-radius: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.user_icon{
+    border-radius: 50%;
+}
+
+.basic_info{
+    margin-top: 10px;
+}
+
+.history_btn{
+    margin-bottom: 10px;
+}
+.history_btn:hover{
+    background-color: rgb(0, 78, 188);
+}
+.change_pwd_btn{
+    padding: 5px;
+}
+.change_pwd_btn:hover{
+    background-color: rgb(0, 78, 188);
+}
+.logout_btn{
+    padding: 5px;
+}
+.logout_btn:hover{
+    background-color: rgb(0, 78, 188);
+}
+.del_acc_btn{
+    padding: 5px;
+}
+.del_acc_btn:hover{
+    background-color: rgb(93, 0, 0);
+}
+
+.history_popup{
+    box-shadow: 0px 0px 20px black;
+}
+
+.cross_btn{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.cross_btn:hover{
+    background-color: darkred;
+}
+
+
+/*------- Login page css -------*/
+
+.login_frame{
+    padding: 10px;
+    box-shadow: 0px 10px 10px black;
+}
+
+.login_btn{
+    box-shadow: 0px 5px 10px black;
+    border-radius: 10px;
+    background-color: green;
+}
+.login_btn:hover{
+    background-color: darkgreen;
+}
+
+.enter_fields{
+    padding-bottom: 10px;
+}
+
+/*------- Register page css -------*/
+
+.register_frame{
+    padding: 10px;
+    box-shadow: 0px 10px 10px black;
+}
+
+.register_btn{
+    box-shadow: 0px 5px 10px black;
+    border-radius: 10px;
+    background-color: green;
+}
+.register_btn:hover{
+    background-color: darkgreen;
 }
