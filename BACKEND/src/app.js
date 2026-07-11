@@ -107,6 +107,7 @@ Undetected: ${reportData.undetected}
 Provide me a short report summary of 120 words stictly that first contains whether the file is safe, suspicious or malicious 
 Then tell me how many number of vendors have said it is safe or malicious 
 Then give an advice to the user based on this 
+also keep in mind to not use bold,italics, or any special formatting in the summary and do not include headers or titles in the summary. The summary should be concise and easy to understand for a non-technical user.
 `;
 
 const result = await model.generateContent({ contents: [
