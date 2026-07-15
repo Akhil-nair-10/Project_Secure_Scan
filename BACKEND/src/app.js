@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'https://secure-scan-frontend.onrender.com/api'
+  origin: 'https://secure-scan-frontend.onrender.com'
 }));
 
 //simply backend testing
