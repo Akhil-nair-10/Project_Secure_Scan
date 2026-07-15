@@ -32,7 +32,7 @@ const Result = () => {
     async function fetchReport() {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/result/${analysisId}`
+        `${import.meta.env.VITE_API_URL}/results/${analysisId}`
       );
       const data = response.data.data.attributes;
       console.log(data);

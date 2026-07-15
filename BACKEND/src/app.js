@@ -1,135 +1,23 @@
 const express = require('express');
 const cors = require('cors');
-const multer = require('multer');
-const axios = require('axios');
-const FormData = require('form-data');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const rateLimit = require('express-rate-limit');
-
-const genAI = new GoogleGenerativeAI(
-  process.env.GEMINI_API_KEY
-);
-
-const model = genAI.getGenerativeModel({
-  model: 'gemini-2.5-flash-lite',
-})
+const scanRoute = require('./routes/scan.routes');
+const aiSummaryRoute = require('./routes/aiSummary.routes');
 
 const app = express();
 
-const globalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: 'Too many requests, please try again later.'
-});
+app.use(express.json());
 
-app.use(globalLimiter);
 app.use(cors({
   origin: 'https://secure-scan-frontend.onrender.com'
 }));
-app.use(express.json());
-const upload = multer({ storage: multer.memoryStorage(),
-  limits: {
-    fileSize: 32 * 1024 * 1024 // 32MB
-  }
- });
 
 //simply backend testing
 app.get('/', (req, res) => {
   res.send('Backend is running');
 });
 
-const scanLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 10,
-  message: 'Too many scan requests.'
-});
+app.use('/api', scanRoute); //api that handles file scanning and fetching scan results
 
-//for sending file to virus total and getting the response.data ONLY
-app.post('/scan',scanLimiter, upload.single('file'), async (req, res) => {
-    try{
-      const formData = new FormData();
-
-      formData.append('file', req.file.buffer, req.file.originalname);
-
-      const response = await axios.post(
-        'https://www.virustotal.com/api/v3/files',
-        formData,
-        {
-          headers: {
-            ...formData.getHeaders(),
-            'x-apikey': process.env.VT_API_KEY  
-          }
-        }
-      );
-      res.json(response.data);
-    } catch (err) {
-      console.log(err.message);
-      res.status(500).send('VirusTotal API request failed');
-    }
-});
-
-//to get the report of the file using its id
-app.get('/result/:id', async (req, res) => {
-  try{
-    const analysisId = req.params.id;
-    const response = await axios.get(
-      `https://www.virustotal.com/api/v3/analyses/${analysisId}`,
-      {
-        headers: {
-          'x-apikey': process.env.VT_API_KEY
-        }
-      }
-    );
-    res.json(response.data);
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).send('Failed to fetch analysis results');
-  }
-});
-
-app.post('/ai-summary', async (req, res) => {
-  try {
-
-    console.log("AI ROUTE HIT");
-    console.log(req.body);
-
-    const { reportData } = req.body;
-
-    const prompt = `
-You are a cybersecurity assistant.
-
-Analyze this VirusTotal scan result and generate a summary based on this:
-
-Malicious: ${reportData.malicious}
-Suspicious: ${reportData.suspicious}
-Undetected: ${reportData.undetected} 
-
-Provide me a short report summary of 120 words stictly that first contains whether the file is safe, suspicious or malicious 
-Then tell me how many number of vendors have said it is safe or malicious 
-Then give an advice to the user based on this 
-also keep in mind to not use bold,italics, or any special formatting in the summary and do not include headers or titles in the summary. The summary should be concise and easy to understand for a non-technical user.
-`;
-
-const result = await model.generateContent({ contents: [
-  { 
-    role: "user", 
-    parts: [{ text: prompt }] 
-  }
-] 
-});
-
-const response = await result.response;
-const text = response.text();
-
-res.json({ summary: text }); //sends summary to frontend
-
-  } catch (err) {
-    console.log("FULL AI ERROR");
-    console.log(err);
-    res.status(500).json({
-    error: err.message
-  });
-  }
-});
+app.use('/api', aiSummaryRoute); //api that handles generating AI summary based on scan results
 
 module.exports = app;
