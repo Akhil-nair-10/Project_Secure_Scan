@@ -36,6 +36,8 @@ const Input = () => {
           const formData = new FormData();
           formData.append('file', file);
 
+          console.log(import.meta.env.VITE_API_URL);
+
           const response = await axios.post(
             `${import.meta.env.VITE_API_URL}/scan`,
             formData
