@@ -79,7 +79,7 @@ const Input = () => {
       <div className='Input_and_btn_wrapper'>
       
       <div className='Input_file_name lg:w-2xs w-full flex select-none cursor-pointer' onClick={fileUpload}>
-        <span className="upload_popup">32mb only</span>
+        <span className="upload_popup">32mb limit</span>
         <input type='file' ref={inputRef} onChange={fileNameUpdate} className='input_field lg:w-2xs w-full'/>
          <span className="file_name_text">
            {fileName}
