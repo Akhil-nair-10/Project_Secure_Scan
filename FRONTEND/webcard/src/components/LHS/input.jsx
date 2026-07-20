@@ -77,8 +77,13 @@ const Input = () => {
       <p className='txt2 font-extralight lg:font-medium text-cyan-400 select-none'>Upload to scan your files</p>
       </div>
       <div className='Input_and_btn_wrapper'>
+      
       <div className='Input_file_name lg:w-2xs w-full flex select-none cursor-pointer' onClick={fileUpload}>
-        <input type='file' ref={inputRef} onChange={fileNameUpdate} className='input_field lg:w-2xs w-full'/>{fileName}
+        <span className="upload_popup">32mb only</span>
+        <input type='file' ref={inputRef} onChange={fileNameUpdate} className='input_field lg:w-2xs w-full'/>
+         <span className="file_name_text">
+           {fileName}
+         </span>
       </div>
       <div className='btn_wrapper lg:w-2xs flex'>
         <button className='scan_btn h-full active:scale-97 select-none' onClick={scanBtnClick} >{scanTxt}</button>

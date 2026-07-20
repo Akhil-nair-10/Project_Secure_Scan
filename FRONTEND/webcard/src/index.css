@@ -53,10 +53,25 @@ body{
     border-radius: 10px;
     align-items: center;
     animation: breathe2 3s infinite ease-in-out;
+    position: relative;
 }
-.Input_file_name:hover{
-    transition: 0.4s;
-    text-shadow: 0px 0px 20px white;
+
+.file_name_text{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.upload_popup{
+    position: absolute;
+    top: -20px;
+    right: 0;
+    opacity: 0;
+    color: cyan;
+    font-size: 12px;
+}
+.Input_file_name:hover .upload_popup{
+    opacity: 1;
 }
 
 .RHS{
