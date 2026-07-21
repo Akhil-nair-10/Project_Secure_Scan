@@ -21,6 +21,13 @@ const Login_page = () => {
             navigate('/')
         }
         catch(error){
+
+        console.log("Inside catch");
+        console.log(error);
+        console.log(error.response);
+        console.log(error.response?.data);
+
+
             setError(
             error.response?.data?.message || "Something went wrong."
         );
