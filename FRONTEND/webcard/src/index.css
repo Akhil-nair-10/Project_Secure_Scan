@@ -69,6 +69,7 @@ body{
     opacity: 0;
     color: cyan;
     font-size: 12px;
+    transition: 0.4s;
 }
 .Input_file_name:hover .upload_popup{
     opacity: 1;

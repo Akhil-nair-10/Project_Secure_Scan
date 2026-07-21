@@ -1,7 +1,14 @@
 const express = require('express');
 const cors = require('cors');
+const dns =  require('dns');
 const scanRoute = require('./routes/scan.routes');
 const aiSummaryRoute = require('./routes/aiSummary.routes');
+const authRoutes = require('./routes/auth.routes');
+
+dns.setServers([
+  '1.1.1.1',
+  '8.8.8.8'
+])
 
 const app = express();
 
@@ -16,8 +23,9 @@ app.get('/', (req, res) => {
   res.send('Backend is running');
 });
 
-app.use('/api', scanRoute); //api that handles file scanning and fetching scan results
 
+app.use('/api', scanRoute); //api that handles file scanning and fetching scan results
 app.use('/api', aiSummaryRoute); //api that handles generating AI summary based on scan results
+app.use('/api', authRoutes) //api that handles the auth stuffs 
 
 module.exports = app;
