@@ -14,14 +14,14 @@ const Register_page = () => {
 
     async function registerMe(){
         try{
-        setError('');
-        const userDetails = await axios.post(
-            `${import.meta.env.VITE_API_URL}/register`,
-            {username, email, password}
-        )
+            setError('');
+            const userDetails = await axios.post(
+                `${import.meta.env.VITE_API_URL}/register`,
+                {username, email, password}
+            )
 
-        console.log("User Registered");
-        navigate('/')
+            console.log("User Registered");
+            navigate('/')
         }
         catch(error){
         setError(
@@ -46,12 +46,12 @@ const Register_page = () => {
                 <button className='register_btn h-10 w-2/3 text-white font-bold cursor-pointer active:scale-97' onClick={registerMe} >Register</button>             
             </div>
             {
-            error && (
-            <p className="text-red-500 font-semibold mt-2 flex justify-center">
-                {error}
-            </p>
-    )
-}
+                error && (
+                    <p className="text-red-500 font-semibold mt-2 flex justify-center">
+                        {error}
+                    </p>
+                )
+            }
             <div className='flex justify-center items-center flex-col lg:flex-row'>
                <p>Already have an account?</p><Link to='/login_page' className='text-blue-500 underline active:scale-97 hover:text-blue-800'>Click here to Login</Link>
             </div>
