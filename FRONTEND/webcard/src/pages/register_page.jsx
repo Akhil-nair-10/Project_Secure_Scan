@@ -47,7 +47,7 @@ const Register_page = () => {
             </div>
             {
             error && (
-            <p className="text-red-500 font-semibold mt-2">
+            <p className="text-red-500 font-semibold mt-2 flex justify-center">
                 {error}
             </p>
     )

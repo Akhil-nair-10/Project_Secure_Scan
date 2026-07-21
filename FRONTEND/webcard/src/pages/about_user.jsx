@@ -5,6 +5,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 const About_user = () => {
 
   const [popup, setPopup] = useState(false);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [dbStatus, setDbStatus] = useState('Not Connected');
 
   const navigate = useNavigate();
 
@@ -21,13 +24,13 @@ const About_user = () => {
         <div className='user_frame_main h-7/8 flex flex-col lg:flex-row justify-center items-center'>
           <div className='framer1 h-full lg:w-1/2 w-full flex flex-col justify-center items-center gap-1'>
             <div className='user_icon h-40 w-40 border-2 lg:h-60 lg:w-60 bg-gray-500'/>
-            <div className='user_name text-center text-white w-fit items-center font-extrabold font-serif'>USERNAME</div>
-            <div className='email_txt text-center lg:h-8 lg:w-fit text-white items-center font-serif opacity-30 font-light lg:font-extrabold'>xyz@gmail.com</div>
+            <div className='user_name text-center text-white w-fit items-center font-extrabold font-serif'>{username}</div>
+            <div className='email_txt text-center lg:h-8 lg:w-fit text-white items-center font-serif opacity-30 font-light lg:font-extrabold'>{email}</div>
           </div>
           <div className='framer2 h-full lg:w-1/2 w-full flex items-center flex-col'>
             <div className='basic_info text-sky-300 opacity-30 text-center text-xs lg:text-xl lg:font-bold'>
               <p>SECURE_SCAN_v2.0</p>
-              <p>DB STATUS : CONNECTED</p>
+              <p>DB STATUS : {dbStatus}</p>
               <p>THIS IS NON-FUNCTIONAL PAGE</p>
             </div>
             <div className='hist_wrap h-full w-full flex justify-center items-end'>
