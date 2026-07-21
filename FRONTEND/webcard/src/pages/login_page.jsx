@@ -9,6 +9,8 @@ const Login_page = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
+    const navigate = useNavigate();
+
     async function loginMe(){
         try{
             setError('');
