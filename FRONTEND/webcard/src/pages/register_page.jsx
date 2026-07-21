@@ -15,7 +15,7 @@ const Register_page = () => {
     async function registerMe(){
         try{
             setError('');
-            const userDetails = await axios.post(
+            await axios.post(
                 `${import.meta.env.VITE_API_URL}/register`,
                 {username, email, password}
             )

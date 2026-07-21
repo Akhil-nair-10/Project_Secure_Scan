@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Login_page = () => {
 
@@ -11,7 +12,7 @@ const Login_page = () => {
     async function loginMe(){
         try{
             setError('');
-            const userDetails = await axios.post(
+            await axios.post(
                 `${import.meta.env.VITE_API_URL}/login`,
                 {email, password}
             )
