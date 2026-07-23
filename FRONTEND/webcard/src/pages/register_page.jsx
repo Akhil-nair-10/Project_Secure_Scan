@@ -17,7 +17,10 @@ const Register_page = () => {
             setError('');
             await axios.post(
                 `${import.meta.env.VITE_API_URL}/register`,
-                {username, email, password}
+                {username, email, password},
+                {
+                    withCredentials:true
+                }
             )
 
             console.log("User Registered");

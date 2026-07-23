@@ -16,8 +16,11 @@ const Login_page = () => {
             setError('');
             await axios.post(
                 `${import.meta.env.VITE_API_URL}/login`,
-                {email, password}
-            )
+                {email, password},
+                {
+                    withCredentials:true
+                }
+            );
 
             console.log("User Logged in");
             navigate('/');

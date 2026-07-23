@@ -28,7 +28,11 @@ async function registerUser(req,res) {
         id: user._id,
     }, process.env.JWT_SECRET);
 
-    res.cookie('Token', token);
+    res.cookie('Token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None"
+    });
 
     res.status(201).json({
         message: 'New User Created Successfully!'
@@ -60,7 +64,11 @@ async function loginUser(req, res) {
         id: existingUser._id
     }, process.env.JWT_SECRET);
 
-    res.cookie("Token", token);
+    res.cookie("Token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None"
+    });
 
     res.status(200).json({
         message: 'Welcome back logged-in User'
@@ -70,7 +78,11 @@ async function loginUser(req, res) {
 
 //for logout the existing user
 async function logoutUser(req, res){
-    res.clearCookie("token");
+    res.clearCookie("Token",{
+        httpOnly: true,
+        secure: true,
+        sameSite: "None"
+    });
 
     return res.status(200).json({
         message: "Logged out successfully"
