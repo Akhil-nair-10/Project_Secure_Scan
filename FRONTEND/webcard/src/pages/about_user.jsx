@@ -17,10 +17,12 @@ const About_user = () => {
     try{
       await axios.post(
          `${import.meta.env.VITE_API_URL}/logout`,
+         {},
+         { withCredentials: true }
       )
 
-      console.log("User Logged Out");
       navigate('/login_page');
+      console.log("User Logged Out");
     }
     catch(error){
       alert("Something went wrong");

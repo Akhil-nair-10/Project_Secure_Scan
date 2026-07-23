@@ -29,9 +29,9 @@ async function registerUser(req,res) {
     }, process.env.JWT_SECRET);
 
     res.cookie('Token', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "None"
+        httpOnly: true, //means dont let javascript read the cookie
+        secure: true, //HTTP only 
+        sameSite: "None" //allows cross origin cookie exchange frontend-backend
     });
 
     res.status(201).json({
@@ -79,9 +79,9 @@ async function loginUser(req, res) {
 //for logout the existing user
 async function logoutUser(req, res){
     res.clearCookie("Token",{
-        httpOnly: true,
-        secure: true,
-        sameSite: "None"
+        httpOnly: true, //means dont let javascript read the cookie
+        secure: true, //Http only 
+        sameSite: "None" //allows cross origin as the frontend and backend urls are on different links on render
     });
 
     return res.status(200).json({
