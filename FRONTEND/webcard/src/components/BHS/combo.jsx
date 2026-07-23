@@ -1,4 +1,6 @@
 import React from 'react'
+import Input from '../LHS/input'
+import Lock_icon from '../RHS/lock_icon'
 
 const Combo = () => {
   return (
