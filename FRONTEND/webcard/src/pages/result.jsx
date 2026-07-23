@@ -123,7 +123,7 @@ const Result = () => {
   return (
     <div className='result_bg h-full w-screen flex justify-center select-none bg-blue-950'>
       <div className='result-frame w-4/5 flex flex-col h-full'>
-            <Link to='/' className='back_btn text-center h-8 w-fit flex justify-center text-cyan-500 items-center font-bold active:scale-97'>Back</Link>
+            <Link to='/scan_page' className='back_btn text-center h-8 w-fit flex justify-center text-cyan-500 items-center font-bold active:scale-97'>Back</Link>
             <p className='text-white font-bold text-2xl'>Ai Summary:</p>
             <div className='summary_graph_wrapper h-fit w-full flex flex-col justify-center items-center lg:flex-row gap-4'>
                 <div className='ai_summary_area flex justify-start lg:h-65 h-full w-full lg:w-2/3 font-bold text-white'>{aiSummary || "Generating Ai Summary..."}</div>

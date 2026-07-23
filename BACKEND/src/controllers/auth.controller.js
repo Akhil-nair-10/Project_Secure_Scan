@@ -90,8 +90,38 @@ async function logoutUser(req, res){
 
 }
 
+//to FETCH user data
+async function getUser(req, res){
+    try {
+
+        const user = await userModel
+            .findById(req.user.id)
+            .select("username email");
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found."
+            });
+        }
+
+        return res.status(200).json({
+            username: user.username,
+            email: user.email
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            message: "Internal Server Error"
+        });
+
+    }
+
+}
+
 module.exports = {
     registerUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    getUser
 };

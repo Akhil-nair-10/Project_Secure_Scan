@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -13,6 +13,25 @@ const About_user = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    async function fetchUser() {
+        try {
+            const response = await axios.get(
+                `${import.meta.env.VITE_API_URL}/getUser`,
+                {
+                    withCredentials: true
+                }
+            );
+            setUsername(response.data.username);
+            setEmail(response.data.email);
+        } catch (error) {
+            console.log(error);
+            alert("Something went wrong Cannot get the User Data");
+        }
+    }
+    fetchUser();
+}, []);
+
   async function logoutMe(){
     try{
       await axios.post(
@@ -21,7 +40,7 @@ const About_user = () => {
          { withCredentials: true }
       )
 
-      navigate('/login_page');
+      navigate('/');
       console.log("User Logged Out");
     }
     catch(error){
@@ -34,7 +53,7 @@ const About_user = () => {
     <div className='about_bg h-screen w-screen flex justify-center items-center select-none'>
       <div className='wrapper lg:h-4/6 lg:w-4/6 h-8/9 w-5/6'> 
         <div className='user_frame_top h-1/8 w-full'>
-          <Link to='/' className='back_btnx flex justify-center items-center h-8 w-fit text-cyan-500 font-bold active:scale-97'>Back</Link>
+          <Link to='/scan_page' className='back_btnx flex justify-center items-center h-8 w-fit text-cyan-500 font-bold active:scale-97'>Back</Link>
         </div>
         <div className='user_frame_main h-7/8 flex flex-col lg:flex-row justify-center items-center'>
           <div className='framer1 h-full lg:w-1/2 w-full flex flex-col justify-center items-center gap-1'>
