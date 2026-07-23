@@ -30,7 +30,7 @@ async function registerUser(req,res) {
 
     res.cookie('Token', token, {
         httpOnly: true, //means dont let javascript read the cookie
-        secure: true, //HTTP only 
+        secure: true, //send this cookie over HTTPS
         sameSite: "None" //allows cross origin cookie exchange frontend-backend
     });
 
@@ -80,7 +80,7 @@ async function loginUser(req, res) {
 async function logoutUser(req, res){
     res.clearCookie("Token",{
         httpOnly: true, //means dont let javascript read the cookie
-        secure: true, //Http only 
+        secure: true, //send cookie over HTTPS only
         sameSite: "None" //allows cross origin as the frontend and backend urls are on different links on render
     });
 

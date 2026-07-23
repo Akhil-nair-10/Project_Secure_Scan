@@ -4,6 +4,8 @@ const dns =  require('dns');
 const scanRoute = require('./routes/scan.routes');
 const aiSummaryRoute = require('./routes/aiSummary.routes');
 const authRoutes = require('./routes/auth.routes');
+const cookieParser = require("cookie-parser");
+
 
 dns.setServers([
   '1.1.1.1',
@@ -13,6 +15,7 @@ dns.setServers([
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(cors({
   origin: 'https://secure-scan-frontend.onrender.com',
