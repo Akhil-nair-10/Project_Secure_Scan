@@ -302,6 +302,19 @@ body{
     background-color: darkred;
 }
 
+.delete_popup{
+    padding:20px;
+    box-shadow: 0px 0px 10px black;
+}
+.yes_btn{
+    border: 2px solid;
+    border-radius: 10px;
+}
+.no_btn{
+     border: 2px solid;
+    border-radius: 10px;
+}
+
 
 /*------- Login page css -------*/
 

@@ -1,18 +1,31 @@
 import React from 'react'
 import { useState } from 'react';
+import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const About_user = () => {
 
   const [popup, setPopup] = useState(false);
+  const [deletePopup, setDeletePopup] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [dbStatus, setDbStatus] = useState('Not Connected');
 
   const navigate = useNavigate();
 
-  function toLogin(){
-    navigate('/login_page')
+  async function logoutMe(){
+    try{
+      await axios.post(
+         `${import.meta.env.VITE_API_URL}/logout`,
+      )
+
+      console.log("User Logged Out");
+      navigate('/login_page');
+    }
+    catch(error){
+      alert("Something went wrong");
+    }
+
   }
 
   return (
@@ -48,8 +61,16 @@ const About_user = () => {
             )}
             <div className='tri_btn w-full flex justify-center items-center lg:flex-row flex-col gap-2'>
               <button className='change_pwd_btn lg:h-15 w-full border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer'>Change Password</button>
-              <button className='logout_btn lg:h-15 w-full border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer' onClick={toLogin}>Log-Out</button>
-              <button className='del_acc_btn lg:h-15 w-full border-2 font-extrabold rounded-2xl bg-red-600 active:scale-97 cursor-pointer'>Delete Account</button>
+              <button className='logout_btn lg:h-15 w-full border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer' onClick={logoutMe}>Log-Out</button>
+              <button className='del_acc_btn lg:h-15 w-full border-2 font-extrabold rounded-2xl bg-red-600 active:scale-97 cursor-pointer' onClick={() => setDeletePopup(true)}>Delete Account</button>
+              {deletePopup && (
+                <div className='fixed bg-black/50 h-screen z-10 w-screen flex justify-center items-center top-0 left-0'>
+                  <div className='delete_popup bg-slate-900 h-60 w-2/3 lg:w-100 md:w-3/4 flex items-center flex-col justify-end rounded-2xl'>
+                    <div className='content text-white h-1/2 w-full flex items-start justify-center'>ARE YOU SURE?</div>
+                    <div className='yes_no_wrapper flex h-1/2 w-full items-end justify-center gap-10'><button className='yes_btn bg-teal-400 h-10 w-30 lg:w-25 hover:bg-red-600 cursor-pointer active:scale-97'>YES</button><button className='no_btn bg-teal-400 h-10 w-30 lg:w-25 hover:bg-teal-800 cursor-pointer active:scale-97'onClick={() => setDeletePopup(false)}>NO</button></div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

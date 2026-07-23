@@ -20,7 +20,7 @@ const Login_page = () => {
             )
 
             console.log("User Logged in");
-            navigate('/')
+            navigate('/');
         }
         catch(error){
 
