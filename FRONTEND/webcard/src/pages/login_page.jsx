@@ -23,7 +23,7 @@ const Login_page = () => {
             );
 
             console.log("User Logged in");
-            navigate('/');
+            navigate('/scan_page');
         }
         catch(error){
 
