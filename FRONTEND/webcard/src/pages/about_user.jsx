@@ -88,7 +88,7 @@ const About_user = () => {
                 <div className='fixed bg-black/50 h-screen z-10 w-screen flex justify-center items-center top-0 left-0'>
                   <div className='delete_popup bg-slate-900 h-60 w-2/3 lg:w-100 md:w-3/4 flex items-center flex-col justify-end rounded-2xl'>
                     <div className='content text-white h-1/2 w-full flex items-start justify-center'>ARE YOU SURE?</div>
-                    <div className='yes_no_wrapper flex h-1/2 w-full items-end justify-center gap-10'><button className='yes_btn bg-teal-400 h-10 w-30 lg:w-25 hover:bg-red-600 cursor-pointer active:scale-97'>YES</button><button className='no_btn bg-teal-400 h-10 w-30 lg:w-25 hover:bg-teal-800 cursor-pointer active:scale-97'onClick={() => setDeletePopup(false)}>NO</button></div>
+                    <div className='yes_no_wrapper flex h-1/2 w-full items-end justify-center gap-10'><button className='yes_btn bg-teal-400 h-10 w-30 lg:w-25 cursor-pointer active:scale-97'>YES</button><button className='no_btn bg-teal-400 h-10 w-30 lg:w-25 cursor-pointer active:scale-97'onClick={() => setDeletePopup(false)}>NO</button></div>
                   </div>
                 </div>
               )}

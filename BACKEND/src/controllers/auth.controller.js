@@ -119,9 +119,27 @@ async function getUser(req, res){
 
 }
 
+//to DELETE user 
+async function deleteUser(req, res){
+    
+    await userModel.findByIdAndDelete(req.user.id);
+
+    res.clearCookie("Token",{
+        httpOnly: true, //means dont let javascript read the cookie
+        secure: true, //send cookie over HTTPS only
+        sameSite: "None" //allows cross origin as the frontend and backend urls are on different links on render
+    });
+
+    return res.status(200).json({
+        message: "Logged out successfully"
+    });
+ 
+}
+
 module.exports = {
     registerUser,
     loginUser,
     logoutUser,
-    getUser
+    getUser,
+    deleteUser
 };
