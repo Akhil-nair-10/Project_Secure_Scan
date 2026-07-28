@@ -41,9 +41,9 @@ const Register_page = () => {
                 <p className='text-cyan-400 font-extrabold lg:text-3xl text-center'>Create Account</p>
             </div>
             <div className='enter_fields flex flex-col justify-center items-center gap-4 h-3/6'>
-                <input type='text' className='input_username bg-[#07172e] border border-cyan-700 rounded-lg h-10 lg:w-2/3' placeholder='Username' onChange={(e)=>{setUsername(e.target.value)}}/>
-                <input type='email' className='input_email bg-[#07172e] border border-cyan-700 rounded-lg h-10 lg:w-2/3' placeholder='E-mail' onChange={(e)=>{setEmail(e.target.value)}}/>
-                <input type='password' className='input_pwd bg-[#07172e] border border-cyan-700 rounded-lg h-10 lg:w-2/3' placeholder='Password' onChange={(e)=>{setPassword(e.target.value)}}/>
+                <input type='text' className='input_username bg-[#07172e] border border-cyan-700 rounded-lg h-10 lg:w-2/3' placeholder='Username' required onChange={(e)=>{setUsername(e.target.value)}}/>
+                <input type='email' className='input_email bg-[#07172e] border border-cyan-700 rounded-lg h-10 lg:w-2/3' placeholder='E-mail' required onChange={(e)=>{setEmail(e.target.value)}}/>
+                <input type='password' className='input_pwd bg-[#07172e] border border-cyan-700 rounded-lg h-10 lg:w-2/3' placeholder='Password' required onChange={(e)=>{setPassword(e.target.value)}}/>
             </div>
             <div className='flex justify-center items-start h-2/6'>
                 <button className='register_btn h-10 w-2/3 text-white font-bold cursor-pointer active:scale-97' onClick={registerMe} >Register</button>             

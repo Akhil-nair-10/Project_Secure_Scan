@@ -8,7 +8,27 @@ async function registerUser(req,res) {
     
     const { username, email, password } = req.body;
 
-    const userAlreadyExists = await userModel.findOne({email});
+    const cleanUsername = req.body.username?.trim(); //will only check if value exists if yes then trim if no then undefined and wont call trim 
+    const cleanEmail = req.body.email?.trim(); //same for them 
+    const cleanPwd = req.body.password?.trim(); //same for them 
+
+    if(!cleanUsername){
+        return res.status(400).json({message:"Username is Empty"});
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(cleanEmail) || !cleanEmail) {
+            return res.status(400).json({
+            message: "Invalid email format."
+        });
+    }
+
+    if(!cleanPwd){
+        return res.status(400).json({message:"Password is Empty"});
+    }
+
+    const userAlreadyExists = await userModel.findOne({email:cleanEmail});
 
     if(userAlreadyExists){
         return res.status(409).json({
@@ -16,11 +36,11 @@ async function registerUser(req,res) {
         });
     }
 
-    const hashedPwd = await bcrypt.hash(password,10);
+    const hashedPwd = await bcrypt.hash(cleanPwd,10);
 
     const user = await userModel.create({
-        username, 
-        email, 
+        username:cleanUsername, 
+        email:cleanEmail, 
         password:hashedPwd
     });
 
@@ -42,9 +62,23 @@ async function registerUser(req,res) {
 //for login the existing user
 async function loginUser(req, res) {
 
-    const {email, password} = req.body;
+    const cleanEmail = req.body.email?.trim();
+    const cleanPwd = req.body.password?.trim();
 
-    const existingUser = await userModel.findOne({email});
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(cleanEmail) || !cleanEmail) {
+            return res.status(400).json({
+            message: "Invalid email format."
+        });
+    }
+    
+    if(!cleanPwd){
+        return res.status(400).json({message:"Password is Empty"});
+    }
+
+    const existingUser = await userModel.findOne({email:cleanEmail});
 
     if(!existingUser){
         return res.status(409).json({
@@ -52,7 +86,7 @@ async function loginUser(req, res) {
         });
     }
 
-    const pwdValid = await bcrypt.compare(password, existingUser.password);
+    const pwdValid = await bcrypt.compare(cleanPwd, existingUser.password);
 
     if(!pwdValid){
         return res.status(401).json({
