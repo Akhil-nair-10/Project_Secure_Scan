@@ -131,7 +131,7 @@ async function deleteUser(req, res){
     });
 
     return res.status(200).json({
-        message: "Logged out successfully"
+        message: "User deleted successfully"
     });
  
 }
