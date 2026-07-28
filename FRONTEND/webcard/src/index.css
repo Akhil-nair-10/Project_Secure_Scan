@@ -324,9 +324,70 @@ body{
 
 /*------- Login page css -------*/
 
+@keyframes gridMove{
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-50px);
+    }
+}
+.login_page_bg{
+   min-height:100vh;
+   
+    position:relative;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #09233d,
+            #02060d 70%
+        );
+}
+
 .login_frame{
+    z-index:2;
+    background:rgba(8,18,32,.92);
+    border:1px solid rgba(0,220,255,.25);
     padding: 10px;
-    box-shadow: 0px 10px 10px black;
+    box-shadow: 0px 5px 20px rgba(0, 191, 255, 0.225);
+}
+.login_page_bg::before{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    width:200%;
+    height:200%;
+
+    background-image:
+        linear-gradient(rgba(0,180,255,.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,255,.15) 1px, transparent 1px);
+
+    background-size:50px 50px;
+
+    animation:gridMove 2s linear infinite;
+
+    opacity:.6;
+
+    z-index:0;
+}
+
+.input_email{
+    padding: 10px;
+    color: white;
+}
+.input_pwd{
+    padding: 10px;
+    color: white;
 }
 
 .login_btn{
@@ -344,14 +405,66 @@ body{
 
 /*------- Register page css -------*/
 
+.register_page_bg{
+    min-height:100vh;
+   
+    position:relative;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #09233d,
+            #02060d 70%
+        );
+}
+.register_page_bg::before{
+    
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    width:200%;
+    height:200%;
+
+    background-image:
+        linear-gradient(rgba(0,180,255,.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,255,.15) 1px, transparent 1px);
+
+    background-size:50px 50px;
+
+    animation:gridMove 2s linear infinite;
+
+    opacity:.6;
+
+    z-index:0;
+}
+
 .register_frame{
     padding: 10px;
     box-shadow: 0px 10px 10px black;
+    z-index:2;
+    background:rgba(8,18,32,.92);
+    border:1px solid rgba(0,220,255,.25);
+    padding: 10px;
+    box-shadow: 0px 5px 20px rgba(0, 191, 255, 0.225);
+}
+
+.input_username{
+    margin-top: 10px;
+    padding: 10px;
+    color: white;
 }
 
 .register_btn{
     box-shadow: 0px 5px 10px black;
     border-radius: 10px;
+    margin-top: 10px;
     background-color: green;
 }
 .register_btn:hover{
