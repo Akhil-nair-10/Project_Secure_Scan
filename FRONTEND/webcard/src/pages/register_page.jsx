@@ -56,7 +56,7 @@ const Register_page = () => {
                 )
             }
             <div className='flex justify-center items-center flex-col lg:flex-row'>
-               <p className='text-white'>Already have an account?</p><Link to='/login_page' className='text-blue-500 underline active:scale-97 hover:text-blue-800'>Click here to Login</Link>
+               <p className='text-white'>Already have an account?</p><Link to='/' className='text-blue-500 underline active:scale-97 hover:text-blue-800'>Click here to Login</Link>
             </div>
         </div>
     </div>
