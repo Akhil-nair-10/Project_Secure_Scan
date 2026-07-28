@@ -61,6 +61,7 @@ const About_user = () => {
       console.log("User account deleted");
     }
     catch(error){
+      console.log(error);
       alert("Something went wrong");
     }
   }
