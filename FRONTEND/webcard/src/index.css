@@ -15,13 +15,22 @@ body{
 }
 
 .mainFrame{
-    background: rgb(0, 0, 76);
-    align-items: center;
-    justify-content: center;
+    min-height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #09233d,
+            #02060d 70%
+        );
 }
 
 .innerFrame{
-    background-color: rgb(0, 0, 76);
     box-shadow: 0px 0px 20px white;
     border-radius: 20px;
     animation: breathe 3s infinite ease-in-out;
@@ -172,11 +181,22 @@ body{
 /*------- Result page css -------*/
 
 .waiting_bg{
-    background: rgb(0, 0, 76);
+    min-height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #09233d,
+            #02060d 70%
+        );
 }
 
 .waiting_frame{
-    background: rgb(0, 0, 76);
     padding: 10px;
     color: white;
     border-radius: 10px;
@@ -184,11 +204,22 @@ body{
 }
 
 .result_bg{
-    background: rgb(0, 0, 76);
+    min-height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    
+
+    background:
+        radial-gradient(
+            circle at top,
+            #09233d,
+            #02060d 70%
+        );
 }
 
 .result-frame{
-    background: rgb(0, 0, 76);
     padding: 15px;
     animation: breathe 3s infinite ease-in-out;
 }
@@ -223,11 +254,15 @@ body{
 /*------- About_user css -------*/
 
 .about_bg{
-    background: rgb(0, 0, 76);
+   background:
+        radial-gradient(
+            circle at top,
+            #09233d,
+            #02060d 70%
+        );
 }
 
 .wrapper{
-    background: rgb(0, 0, 76);
     animation: breathe 3s infinite ease-in-out;
     border-radius: 20px;
 }
@@ -269,29 +304,54 @@ body{
     margin-bottom: 10px;
 }
 .history_btn:hover{
-    background-color: rgb(0, 78, 188);
+    background:
+    linear-gradient(
+        90deg,
+        #009dff,
+        #00ffd5
+    );
 }
+.history_content{
+   padding: 5px;
+}
+
 .change_pwd_btn{
     padding: 5px;
 }
 .change_pwd_btn:hover{
-    background-color: rgb(0, 78, 188);
+    background:
+    linear-gradient(
+        90deg,
+        #009dff,
+        #00ffd5
+    );
 }
 .logout_btn{
     padding: 5px;
 }
 .logout_btn:hover{
-    background-color: rgb(0, 78, 188);
+    background:
+    linear-gradient(
+        90deg,
+        #009dff,
+        #00ffd5
+    );
 }
 .del_acc_btn{
     padding: 5px;
 }
 .del_acc_btn:hover{
-    background-color: rgb(93, 0, 0);
+    background:
+    radial-gradient(
+        circle at top,
+        #ff0000,
+        #3c0000
+    )
 }
 
 .history_popup{
     box-shadow: 0px 0px 20px black;
+    background: linear-gradient(#000f23,#09233d);
 }
 
 .cross_btn{
@@ -305,6 +365,7 @@ body{
 .delete_popup{
     padding:20px;
     box-shadow: 0px 0px 10px black;
+    background: linear-gradient(#09233d,#000f23);
 }
 .yes_btn{
     border: 2px solid;
@@ -320,7 +381,6 @@ body{
 .no_btn:hover{
     background-color: rgb(0, 70, 70);
 }
-
 
 /*------- Login page css -------*/
 
@@ -385,9 +445,18 @@ body{
     padding: 10px;
     color: white;
 }
+.input_email:hover{
+    box-shadow: 0px 0px 5px cyan;
+    transition: 0.3s;
+}
+
 .input_pwd{
     padding: 10px;
     color: white;
+}
+.input_pwd:hover{
+    box-shadow: 0px 0px 5px cyan;
+    transition: 0.3s;
 }
 
 .login_btn{
@@ -459,6 +528,10 @@ body{
     margin-top: 10px;
     padding: 10px;
     color: white;
+}
+.input_username:hover{
+    box-shadow: 0px 0px 5px cyan;
+    transition: 0.3s;
 }
 
 .register_btn{

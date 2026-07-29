@@ -88,8 +88,8 @@ const About_user = () => {
             </div>
             {popup && (
               <div className='fixed bg-black/50 h-screen z-10 w-screen flex justify-center items-center top-0 left-0'>
-                <div className='history_popup bg-slate-900 h-2/3 w-3/4 lg:h-2/4 lg:w-2/4 border-2'>
-                  <div className='cross_bar h-1/10 w-full bg-blue-400 flex justify-end items-center'><button className='cross_btn font-bold bg-red-500 h-full w-fit cursor-pointer' onClick={() => setPopup(false)}>✕</button></div>
+                <div className='history_popup h-2/3 w-3/4 lg:h-2/4 lg:w-2/4 border-2'>
+                  <div className='cross_bar h-1/10 w-full bg-cyan-400 flex justify-end items-center'><button className='cross_btn font-bold bg-red-500 h-full w-fit cursor-pointer' onClick={() => setPopup(false)}>✕</button></div>
                   <div className='history_content text-white'>
                     NO HISTORY AVAILABLE TO SHOW
                   </div>

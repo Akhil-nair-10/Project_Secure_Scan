@@ -85,7 +85,7 @@ const Result = () => {
   if(loading){
     return (
       <div className='waiting_bg flex justify-center items-center h-screen w-screen text-2xl font-bold'>
-        <div className='waiting_frame flex bg-blue-950 h-fit lg:w-95 w-80 justify-center items-center rounded-lg border-2 border-gray-600'>
+        <div className='waiting_frame flex h-fit lg:w-95 w-80 justify-center items-center rounded-lg border-2 border-gray-600'>
         Scanning file... please wait ⏳<br/><br/>Nearly 60+ antivirus engines are analyzing your file for threats
         </div>
       </div>
