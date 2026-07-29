@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/auth.middleware');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-router.post('/scan', upload.single('file'), scanController.scanFile);
+router.post('/scan', upload.single('file'), authMiddleware, scanController.scanFile);
 
 router.get('/results/:id',authMiddleware, scanController.getScanResults);
 

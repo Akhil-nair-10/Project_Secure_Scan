@@ -7,7 +7,18 @@ const Lock_icon = () => {
   const navigate = useNavigate();
 
   function myDashboard(){
-    navigate('/about_user')
+        try {
+            const response = await axios.get(
+                `${import.meta.env.VITE_API_URL}/getUser`,
+                {
+                    withCredentials: true
+                }
+            );
+            navigate('/about_user')
+        } catch (error) {
+            console.log(error);
+            alert("Cannot GET userData Please Login");
+        }
   }
 
   return (

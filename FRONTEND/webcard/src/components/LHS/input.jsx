@@ -11,6 +11,7 @@ const Input = () => {
     const [file, setFile] = useState(null);
     const [scanState, setScanState] = useState(false);
     const [scanTxt, setScanTxt] = useState("SCAN");
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
    
@@ -33,6 +34,7 @@ const Input = () => {
 
           setScanState(true);
           setScanTxt("SCANNING...");
+          setLoading(true);
           const formData = new FormData();
           formData.append('file', file);
 
@@ -40,7 +42,13 @@ const Input = () => {
 
           const response = await axios.post(
             `${import.meta.env.VITE_API_URL}/scan`,
-            formData
+            formData,
+            {
+              withCredentials: true,
+              headers: {
+              "Content-Type": "multipart/form-data"
+              }
+            }
           );
 
           console.log(response.data);
@@ -60,6 +68,9 @@ const Input = () => {
         alert("An error occurred while scanning the file");
         setScanState(false);
         setScanTxt("SCAN"); 
+      }
+      finally{
+        setLoading(false);
       }
     }
     }
@@ -86,7 +97,7 @@ const Input = () => {
          </span>
       </div>
       <div className='btn_wrapper lg:w-2xs flex'>
-        <button className='scan_btn h-full active:scale-97 select-none' onClick={scanBtnClick} >{scanTxt}</button>
+        <button className='scan_btn h-full active:scale-97 select-none' onClick={scanBtnClick} disabled={loading}>{scanTxt}</button>
         <button className='clear_btn h-full lg:w-1/4 active:scale-97 select-none' onClick={clearBtnClick}>CLEAR</button>
       </div>
       </div>
