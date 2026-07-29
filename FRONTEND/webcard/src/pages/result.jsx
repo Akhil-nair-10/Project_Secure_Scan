@@ -32,7 +32,10 @@ const Result = () => {
     async function fetchReport() {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/results/${analysisId}`
+        `${import.meta.env.VITE_API_URL}/results/${analysisId}`,
+        {
+          withCredentials: true
+        }
       );
       const data = response.data.data.attributes;
       console.log(data);
@@ -56,6 +59,9 @@ const Result = () => {
             undetected: data.stats.undetected,
             vendors: data.results
           }
+        },
+        {
+          withCredentials: true
         }
       );
 

@@ -6,9 +6,9 @@ const Lock_icon = () => {
 
   const navigate = useNavigate();
 
-  function myDashboard(){
+  async function myDashboard(){
         try {
-            const response = await axios.get(
+            await axios.get(
                 `${import.meta.env.VITE_API_URL}/getUser`,
                 {
                     withCredentials: true
