@@ -6,100 +6,111 @@ import axios from 'axios';
 
 const Input = () => {
 
-    const inputRef = useRef();
-    const [fileName, setFileName] = useState("Upload a File");
-    const [file, setFile] = useState(null);
-    const [scanState, setScanState] = useState(false);
-    const [scanTxt, setScanTxt] = useState("SCAN");
-    const [loading, setLoading] = useState(false);
+  const inputRef = useRef();
+  const [fileName, setFileName] = useState("Upload a File");
+  const [file, setFile] = useState(null);
+  const [scanState, setScanState] = useState(false);
+  const [scanTxt, setScanTxt] = useState("SCAN");
+  const [loading, setLoading] = useState(false);
 
-    const navigate = useNavigate();
-   
+  const navigate = useNavigate();
 
-    function fileUpload(){
-        inputRef.current.click();
+
+  function fileUpload() {
+    inputRef.current.click();
+  }
+  function fileNameUpdate(e) {
+    const selectedFile = e.target.files[0];
+    if (!selectedFile) return;
+    const MAX_SIZE = 32 * 1024 * 1024; // 32 MB
+
+    if (selectedFile.size > MAX_SIZE) {
+      alert("File size must be 32 MB or less");
+      e.target.value = "";
+      setFileName("Upload a File");
+      setFile(null);
+      return;
     }
-    function fileNameUpdate(e){
-        setFileName(e.target.files[0].name)
-        setFile(e.target.files[0])
+    setFileName(e.target.files[0].name)
+    setFile(e.target.files[0])
+  }
+
+  async function scanBtnClick() {
+    if (!file) {
+      alert("Please select a file first");
+      return;
     }
+    else {
+      try {
 
-    async function scanBtnClick(){
-      if(!file){
-        alert("Please select a file first");
-        return;
-      }
-      else{
-        try{
+        setScanState(true);
+        setScanTxt("SCANNING...");
+        setLoading(true);
+        const formData = new FormData();
+        formData.append('file', file);
 
-          setScanState(true);
-          setScanTxt("SCANNING...");
-          setLoading(true);
-          const formData = new FormData();
-          formData.append('file', file);
+        console.log(import.meta.env.VITE_API_URL);
 
-          console.log(import.meta.env.VITE_API_URL);
-
-          const response = await axios.post(
-            `${import.meta.env.VITE_API_URL}/scan`,
-            formData,
-            {
-              withCredentials: true,
-              headers: {
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}/scan`,
+          formData,
+          {
+            withCredentials: true,
+            headers: {
               "Content-Type": "multipart/form-data"
-              }
             }
-          );
+          }
+        );
 
-          console.log(response.data);
+        console.log(response.data);
 
-          const analysisId = response.data.data.id;
-        
-          setScanState(false);
-          setScanTxt("SCAN");
-          navigate('/result', {
-            state: {
-              analysisId: analysisId
-            }
-          });
+        const analysisId = response.data.data.id;
+
+        setScanState(false);
+        setScanTxt("SCAN");
+        navigate('/result', {
+          state: {
+            analysisId: analysisId
+          }
+        });
       }
-      catch(err){
+      catch (err) {
         console.log(err);
         alert("An error occurred while scanning the file");
         setScanState(false);
-        setScanTxt("SCAN"); 
+        setScanTxt("SCAN");
       }
-      finally{
+      finally {
         setLoading(false);
       }
     }
-    }
+  }
 
-    function clearBtnClick(){
-        inputRef.value = "";
-        setFileName("Upload a File");
-        setFile(null)
-    }
+  function clearBtnClick() {
+    inputRef.value = "";
+    setFileName("Upload a File");
+    setFile(null)
+  }
 
   return (
     <div className='LHS h-full lg:w-1/2 flex flex-col'>
-    <div className='texts'>
-      <h3 className='txt1 text-2xl text-cyan-400 select-none whitespace-nowrap'>Secure Scan</h3>
-      <p className='txt2 font-extralight lg:font-medium text-cyan-400 select-none'>Upload to scan your files</p>
+      <div className='texts'>
+        <h3 className='txt1 text-2xl text-cyan-400 select-none whitespace-nowrap'>Secure Scan</h3>
+        <p className='txt2 font-extralight lg:font-medium text-cyan-400 select-none'>Upload to scan your files</p>
       </div>
       <div className='Input_and_btn_wrapper'>
-      
-      <div className='Input_file_name lg:w-2xs w-full flex select-none cursor-pointer' onClick={fileUpload}>
-        <span className="upload_popup">32mb limit</span>
-        <input type='file' ref={inputRef} onChange={fileNameUpdate} className='input_field lg:w-2xs w-full'/>
-         <span className="file_name_text">
-           {fileName}
-         </span>
-      </div>
-      <div className='btn_wrapper lg:w-2xs flex'>
-        <button className='scan_btn h-full active:scale-97 select-none' onClick={scanBtnClick} disabled={loading}>{scanTxt}</button>
-        <button className='clear_btn h-full lg:w-1/4 active:scale-97 select-none' onClick={clearBtnClick}>CLEAR</button>
-      </div>
+
+        <div className='Input_file_name lg:w-2xs w-full flex select-none cursor-pointer' onClick={fileUpload}>
+          <span className="upload_popup">32mb limit</span>
+          <input type='file' ref={inputRef} onChange={fileNameUpdate} className='input_field lg:w-2xs w-full' />
+          <span className="file_name_text">
+            {fileName}
+          </span>
+        </div>
+        <div className='btn_wrapper lg:w-2xs flex'>
+          <button className='scan_btn h-full active:scale-97 select-none' onClick={scanBtnClick} disabled={loading}>{scanTxt}</button>
+          <button className='clear_btn h-full lg:w-1/4 active:scale-97 select-none' onClick={clearBtnClick}>CLEAR</button>
+        </div>
       </div>
     </div>
   )
