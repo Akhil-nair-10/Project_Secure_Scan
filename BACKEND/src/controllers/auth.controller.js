@@ -170,10 +170,54 @@ async function deleteUser(req, res){
  
 }
 
+//for changing the password of an existing user
+async function changePassword(req, res) {
+
+    const { currentPassword, newPassword } = req.body;
+
+    const cleanCurrentPwd = currentPassword?.trim();
+    const cleanNewPwd = newPassword?.trim();
+
+    if(!cleanCurrentPwd){
+        return res.status(400).json({message:"Current Password is Empty"});
+    }
+
+    if(!cleanNewPwd){
+        return res.status(400).json({message:"New Password is Empty"});
+    }
+
+    const existingUser = await userModel.findById(req.user.id);
+
+    if(!existingUser){
+        return res.status(404).json({
+            message: 'User not found'
+        });
+    }
+
+    const pwdValid = await bcrypt.compare(cleanCurrentPwd, existingUser.password);
+
+    if(!pwdValid){
+        return res.status(401).json({
+            message: 'Current Password is Incorrect'
+        });
+    }
+
+    const hashedPwd = await bcrypt.hash(cleanNewPwd, 10);
+
+    existingUser.password = hashedPwd;
+    await existingUser.save();
+
+    return res.status(200).json({
+        message: 'Password changed successfully'
+    });
+
+}
+
 module.exports = {
     registerUser,
     loginUser,
     logoutUser,
     getUser,
-    deleteUser
+    deleteUser,
+    changePassword
 };

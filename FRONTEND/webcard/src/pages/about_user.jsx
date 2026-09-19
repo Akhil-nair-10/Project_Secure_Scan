@@ -7,9 +7,12 @@ const About_user = () => {
 
   const [popup, setPopup] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
+  const [changePwdPopup, setChangePwdPopup] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [dbStatus, setDbStatus] = useState('Not Connected');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
   const navigate = useNavigate();
 
@@ -65,6 +68,25 @@ const About_user = () => {
     }
   }
 
+  async function changeMyPassword(){
+    try{
+      await axios.post(
+         `${import.meta.env.VITE_API_URL}/changePwd`,
+         { currentPassword, newPassword },
+         { withCredentials: true }
+      )
+
+      setCurrentPassword('');
+      setNewPassword('');
+      setChangePwdPopup(false);
+      console.log("Password Changed Successfully");
+    }
+    catch(error){
+      console.log(error);
+      alert("Something went wrong");
+    }
+  }
+
   return (
     <div className='about_bg h-screen w-screen flex justify-center items-center select-none'>
       <div className='wrapper lg:h-4/6 lg:w-4/6 h-8/9 w-5/6'> 
@@ -97,7 +119,7 @@ const About_user = () => {
               </div>
             )}
             <div className='tri_btn w-full flex justify-center items-center lg:flex-row flex-col gap-2'>
-              <button className='change_pwd_btn lg:h-15 w-full border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer'>Change Password</button>
+              <button className='change_pwd_btn lg:h-15 w-full border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer' onClick={() => setChangePwdPopup(true)}>Change Password</button>
               <button className='logout_btn lg:h-15 w-full border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer' onClick={logoutMe}>Log-Out</button>
               <button className='del_acc_btn lg:h-15 w-full border-2 font-extrabold rounded-2xl bg-red-600 active:scale-97 cursor-pointer' onClick={() => setDeletePopup(true)}>Delete Account</button>
               {deletePopup && (
@@ -105,6 +127,30 @@ const About_user = () => {
                   <div className='delete_popup bg-slate-900 h-60 w-2/3 lg:w-100 md:w-3/4 flex items-center flex-col justify-end rounded-2xl'>
                     <div className='content text-white h-1/2 w-full flex items-start justify-center'>ARE YOU SURE?</div>
                     <div className='yes_no_wrapper flex h-1/2 w-full items-end justify-center gap-10'><button className='yes_btn bg-teal-400 h-10 w-30 lg:w-25 cursor-pointer active:scale-97' onClick={deleteMyAccount}>YES</button><button className='no_btn bg-teal-400 h-10 w-30 lg:w-25 cursor-pointer active:scale-97'onClick={() => setDeletePopup(false)}>NO</button></div>
+                  </div>
+                </div>
+              )}
+              {changePwdPopup && (
+                <div className='fixed bg-black/50 h-screen z-10 w-screen flex justify-center items-center top-0 left-0'>
+                  <div className='change_pwd_popup h-2/3 w-3/4 lg:h-2/4 lg:w-2/4 border-2'>
+                    <div className='cross_bar h-1/10 w-full bg-cyan-400 flex justify-end items-center'><button className='cross_btn font-bold bg-red-500 h-full w-fit cursor-pointer' onClick={() => { setChangePwdPopup(false); setCurrentPassword(''); setNewPassword(''); }}>✕</button></div>
+                    <div className='change_pwd_content h-9/10 w-full flex flex-col justify-center items-center gap-4 bg-slate-900'>
+                      <input
+                        type='password'
+                        placeholder='Current Password'
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        className='pwd_input h-10 w-3/4 lg:w-1/2 border-2 rounded-lg px-3 text-white bg-transparent'
+                      />
+                      <input
+                        type='password'
+                        placeholder='New Password'
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className='pwd_input h-10 w-3/4 lg:w-1/2 border-2 rounded-lg px-3 text-white bg-transparent'
+                      />
+                      <button className='confirm_pwd_btn h-10 w-3/4 lg:w-1/2 border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer' onClick={changeMyPassword}>Confirm</button>
+                    </div>
                   </div>
                 </div>
               )}
