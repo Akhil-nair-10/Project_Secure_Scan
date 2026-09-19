@@ -21,6 +21,7 @@ const Result = () => {
 
     const location = useLocation();
     const analysisId = location.state?.analysisId;
+    const fileName = location.state?.fileName;
     const [reportData, setReportData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [summaryGenerated, setSummaryGenerated] = useState(false);
@@ -32,7 +33,7 @@ const Result = () => {
     async function fetchReport() {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/results/${analysisId}`,
+        `${import.meta.env.VITE_API_URL}/results/${analysisId}?filename=${encodeURIComponent(fileName)}`,
         {
           withCredentials: true
         }
