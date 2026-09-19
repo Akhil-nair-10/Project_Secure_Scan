@@ -22,7 +22,7 @@ async function scanFile(req, res) {
           );
           res.json(response.data);
         } catch (err) {
-          console.log(err.message);
+          console.log(err.response?.data || err.message);
           res.status(500).send('VirusTotal API request failed');
         }
     
@@ -63,7 +63,7 @@ async function getScanResults(req, res) {
 
         res.json(response.data);
       } catch (err) {
-        console.log(err.message);
+        console.log(err.response?.data || err.message);
         res.status(500).send('Failed to fetch analysis results');
       }
 }
