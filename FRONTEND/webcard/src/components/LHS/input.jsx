@@ -70,7 +70,8 @@ const Input = () => {
         setScanTxt("SCAN");
         navigate('/result', {
           state: {
-            analysisId: analysisId
+            analysisId: analysisId,
+            fileName: fileName
           }
         });
       }
