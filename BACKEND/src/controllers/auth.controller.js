@@ -213,11 +213,43 @@ async function changePassword(req, res) {
 
 }
 
+//to FETCH scan history of the logged-in user
+async function getScanHistory(req, res){
+    try {
+
+        const user = await userModel
+            .findById(req.user.id)
+            .select("scanHistory");
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found."
+            });
+        }
+
+        //reverse so most recent scan shows first
+        const history = [...user.scanHistory].reverse();
+
+        return res.status(200).json({
+            scanHistory: history
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            message: "Internal Server Error"
+        });
+
+    }
+
+}
+
 module.exports = {
     registerUser,
     loginUser,
     logoutUser,
     getUser,
     deleteUser,
-    changePassword
+    changePassword,
+    getScanHistory
 };

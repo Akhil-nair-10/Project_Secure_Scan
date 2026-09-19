@@ -13,6 +13,7 @@ const About_user = () => {
   const [dbStatus, setDbStatus] = useState('Not Connected');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [scanHistory, setScanHistory] = useState([]);
 
   const navigate = useNavigate();
 
@@ -87,6 +88,21 @@ const About_user = () => {
     }
   }
 
+  async function fetchScanHistory(){
+    try{
+      const response = await axios.get(
+         `${import.meta.env.VITE_API_URL}/getScanHistory`,
+         { withCredentials: true }
+      )
+
+      setScanHistory(response.data.scanHistory);
+    }
+    catch(error){
+      console.log(error);
+      alert("Something went wrong Cannot get Scan History");
+    }
+  }
+
   return (
     <div className='about_bg h-screen w-screen flex justify-center items-center select-none'>
       <div className='wrapper lg:h-4/6 lg:w-4/6 h-8/9 w-5/6'> 
@@ -106,14 +122,23 @@ const About_user = () => {
               <p>THIS IS NON-FUNCTIONAL PAGE</p>
             </div>
             <div className='hist_wrap h-full w-full flex justify-center items-end'>
-              <button className='history_btn lg:h-15 h-9 w-full border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer' onClick={() => setPopup(true)}>SCAN HISTORY</button>
+              <button className='history_btn lg:h-15 h-9 w-full border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer' onClick={() => { setPopup(true); fetchScanHistory(); }}>SCAN HISTORY</button>
             </div>
             {popup && (
               <div className='fixed bg-black/50 h-screen z-10 w-screen flex justify-center items-center top-0 left-0'>
                 <div className='history_popup h-2/3 w-3/4 lg:h-2/4 lg:w-2/4 border-2'>
                   <div className='cross_bar h-1/10 w-full bg-cyan-400 flex justify-end items-center'><button className='cross_btn font-bold bg-red-500 h-full w-fit cursor-pointer' onClick={() => setPopup(false)}>✕</button></div>
-                  <div className='history_content text-white'>
-                    NO HISTORY AVAILABLE TO SHOW
+                  <div className='history_content text-white h-9/10 w-full overflow-y-auto'>
+                    {scanHistory.length === 0 ? (
+                      <p className='text-center'>NO HISTORY AVAILABLE TO SHOW</p>
+                    ) : (
+                      scanHistory.map((scan, index) => (
+                        <div key={index} className='history_row flex justify-between items-center border-b-2 px-3 py-2'>
+                          <span>{scan.filename}</span>
+                          <span className={scan.verdict === 'Malicious' ? 'text-red-500 font-bold' : 'text-green-400 font-bold'}>{scan.verdict}</span>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
