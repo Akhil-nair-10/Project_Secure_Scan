@@ -10,7 +10,6 @@ const About_user = () => {
   const [changePwdPopup, setChangePwdPopup] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [dbStatus, setDbStatus] = useState('Not Connected');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [scanHistory, setScanHistory] = useState([]);
@@ -118,8 +117,6 @@ const About_user = () => {
           <div className='framer2 h-full lg:w-1/2 w-full flex items-center flex-col'>
             <div className='basic_info text-sky-300 opacity-30 text-center text-xs lg:text-xl lg:font-bold'>
               <p>SECURE_SCAN_v2.0</p>
-              <p>DB STATUS : {dbStatus}</p>
-              <p>THIS IS NON-FUNCTIONAL PAGE</p>
             </div>
             <div className='hist_wrap h-full w-full flex justify-center items-end'>
               <button className='history_btn lg:h-15 h-9 w-full border-2 font-extrabold rounded-2xl bg-sky-500 active:scale-97 cursor-pointer' onClick={() => { setPopup(true); fetchScanHistory(); }}>SCAN HISTORY</button>
