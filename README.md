@@ -6,6 +6,12 @@ SecureScan is a full-stack file security analysis tool that scans uploaded files
 
 ⚠️ File input size restricted to 32mb due to virustotal free tier api limitations
 
+## Screenshot 
+<img width="1919" height="1029" alt="Screenshot 2026-10-23 220712" src="https://github.com/user-attachments/assets/6d07183d-726c-46a6-a509-2a26cefe5220" />
+
+<img width="1919" height="1027" alt="Screenshot 2026-10-23 220828" src="https://github.com/user-attachments/assets/6b5f42d2-775d-41a0-a432-07804065b0d1" />
+
+
 ## 🚀 Features
 
 - Upload any file for malware analysis
